@@ -12,9 +12,9 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 if "history" not in st.session_state:
     st.session_state.history = []
 
+query_engine = get_streamed_rag_query_engine()
 
 def get_streamed_res(input_prompt: str):
-    query_engine = get_streamed_rag_query_engine()
     res = query_engine.query(input_prompt)
     for x in res.response_gen:
         yield x + ""
